@@ -1,4 +1,4 @@
-Used to create automatic AWS EC2 snapshots with limits on the total number of snapshots created and the interval which the snapshots are created.
+Create automatic AWS EC2 snapshots with limits on the total number of snapshots created and the interval which the snapshots are created.
 
 For example, you could create a snapshot every day and only keep the last 7 for a running week's worth of snapshots. Or create a snapshot once a week and only keep the last 4 so you would have a running month's worth of snapshots.
 

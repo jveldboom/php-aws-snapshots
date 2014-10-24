@@ -63,3 +63,6 @@ This is a minimal policy that includes ONLY the permissions needed to work. You 
   ]
 }
 ```
+
+## Questions, issues or suggestions
+Please use the [issues section](../issues) for any questions or issues you have. Also, suggestions, pull request or any help is most welcome!

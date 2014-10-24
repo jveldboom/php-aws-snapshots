@@ -1,6 +1,6 @@
 ## Requirements
 - [AWS CLI](http://aws.amazon.com/cli/)
-- Correct AMI Permissions ([example policy](#example-iam-policy))
+- AWS IAM Permissions ([example policy](#example-iam-policy))
 - PHP 5.3+
 - Access to CRON (or some other type of scheduler)
 

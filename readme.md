@@ -1,16 +1,20 @@
-PHP class to create automatic AWS EC2 snapshots. Includes the ability to limit the number of total snapshots created along with the interval in which they are created.
+Used to create automatic AWS EC2 snapshots with limits on the total number of snapshots created and the interval which the snapshots are created.
 
-For example, you can create a snapshot every day and only keep the last 7 for a running week's worth of snapshots. Or create a snapshot once a week and only keep the last 4 so you would have a running month's worth of snapshots.
+For example, you could create a snapshot every day and only keep the last 7 for a running week's worth of snapshots. Or create a snapshot once a week and only keep the last 4 so you would have a running month's worth of snapshots.
 
 
 ## Requirements
 - [AWS CLI](http://aws.amazon.com/cli/)
-- AWS IAM Permissions ([example policy](#example-iam-policy))
+- AWS IAM snapshot permissions ([example policy](#example-iam-policy))
 - PHP 5.3+
-- Access to CRON (or some other type of scheduler)
+- Access to crontab (or some other job scheduler)
 
-## Example Usage
+## Setup
+This assumes you've already installed and setup [AWS CLI](http://aws.amazon.com/cli/) and added the correct IAM permissions within your AWS console.
+
+### 1. Create PHP file to load class and hold snapshot configuration
 ```php
+<?php
 require_once('snapshots.php');
 $volumes = array(
    'vol-123af85a' => array('description' => 'dev server backup', 'snapshots' => 7, 'interval' => '1 day'),
@@ -19,8 +23,14 @@ $volumes = array(
 $snapshots = new snapshots($volumes);
 $snapshots->run();
 ```
+### 2. Add cron job
+The cron job schedule will depend on your configuration. The class honors the interval setting, but you may not want it to run every minute of every day when you just need a nightly backup.
+```bash
+# run every night at 3:00 am
+00	03	* * * /usr/bin/php /root/scripts/snapshots.php
+```
 
-## Volume Config
+## Volume Configuration
 
 | Name | Type | Description |
 |------|------|-------------|

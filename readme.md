@@ -1,5 +1,3 @@
-# Documentation
-
 ## Requirements
 - [AWS CLI](http://aws.amazon.com/cli/)
 - Correct AMI Permissions ([example policy](#example-iam-policy))

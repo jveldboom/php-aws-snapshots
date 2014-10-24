@@ -1,3 +1,8 @@
+PHP class to create automatic AWS EC2 snapshots. Includes the ability to limit the number of total snapshots created along with the interval in which they are created.
+
+For example, you can create a snapshot every day and only keep the last 7 for a running week's worth of snapshots. Or create a snapshot once a week and only keep the last 4 so you would have a running month's worth of snapshots.
+
+
 ## Requirements
 - [AWS CLI](http://aws.amazon.com/cli/)
 - AWS IAM Permissions ([example policy](#example-iam-policy))
@@ -8,8 +13,8 @@
 ```php
 require_once('snapshots.php');
 $volumes = array(
-   'vol-123af85a' => array('description' => 'dev server backup', 'snapshots' => 3, 'interval' => '7 days'),
-   'vol-321bg96c' => array('description' => 'build server', 'snapshots' => 2, 'interval' => '3 hours'),
+   'vol-123af85a' => array('description' => 'dev server backup', 'snapshots' => 7, 'interval' => '1 day'),
+   'vol-321bg96c' => array('description' => 'image server', 'snapshots' => 4, 'interval' => '1 week'),
 );
 $snapshots = new snapshots($volumes);
 $snapshots->run();

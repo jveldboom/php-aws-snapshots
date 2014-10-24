@@ -2,7 +2,7 @@
 
 ## Requirements
 - [AWS CLI](http://aws.amazon.com/cli/)
-- Correct AMI Permissions (example policy)
+- Correct AMI Permissions ([example policy](#example-iam-policy))
 - PHP 5.3+
 - Access to CRON (or some other type of scheduler)
 
@@ -23,7 +23,7 @@ $snapshots->run();
 |------|------|-------------|
 | *volume id* | string | AWS EBS volume ID
 | description | string | snapshot description that shows in the Snapshot section within AWS console |
-| snapshots | intiger | total number of snapshots to store for volume |
+| snapshots | integer | total number of snapshots to store for volume |
 | interval | string | how often to create snapshot (1 day, 7 days, 2 weeks - full list below)
 
 ### Interval Values

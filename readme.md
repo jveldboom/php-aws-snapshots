@@ -27,7 +27,7 @@ $snapshots->run();
 The cron job schedule will depend on your configuration. The class honors the interval setting, but you may not want it to run every minute of every day when you just need a nightly backup.
 ```bash
 # run every night at 3:00 am
-00	03	* * * /usr/bin/php /root/scripts/snapshots.php
+00	03	* * * /usr/bin/php /root/scripts/run-snapshots.php
 ```
 
 ## Volume Configuration

@@ -89,11 +89,7 @@ class snapshots
 		
 		for($x=0;$x<$snapshot_count - $this->options['snapshots']; ++$x)
 		{
-			$response = self::delete($snapshots->Snapshots[$x]->SnapshotId);
-			$response = json_decode($response);
-			if($response->return != 'true'){
-				echo 'Unable to delete snapshot ID '.$snapshots->Snapshots[$x]->SnapshotId.PHP_EOL;
-			}
+			self::delete($snapshots->Snapshots[$x]->SnapshotId);
 		}		
 	}
 	

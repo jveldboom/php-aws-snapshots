@@ -17,8 +17,8 @@ This assumes you've already installed and setup [AWS CLI](http://aws.amazon.com/
 <?php
 require_once('snapshots.php');
 $volumes = array(
-   'vol-123af85a' => array('description' => 'dev server backup', 'snapshots' => 7, 'interval' => '1 day'),
-   'vol-321bg96c' => array('description' => 'image server', 'snapshots' => 4, 'interval' => '1 week'),
+   'vol-123af85a' => array('snapshots' => 7, 'interval' => '1 day', 'description' => 'dev server backup'),
+   'vol-321bg96c' => array('snapshots' => 4, 'interval' => '1 week', 'description' => 'image server'),
 );
 $snapshots = new snapshots($volumes);
 $snapshots->run();
@@ -35,9 +35,9 @@ The cron job schedule will depend on your configuration. The class honors the in
 | Name | Type | Description |
 |------|------|-------------|
 | *volume id* | string | AWS EBS volume ID
-| description | string | snapshot description that shows in the Snapshot section within AWS console |
 | snapshots | integer | total number of snapshots to store for volume |
 | interval | string | how often to create snapshot (1 day, 7 days, 2 weeks - full list below)
+| description | string | snapshot description that shows in the Snapshot section within AWS console |
 
 ### Interval Values
 The format **must** be `number type`

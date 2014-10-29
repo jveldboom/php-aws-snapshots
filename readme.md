@@ -64,7 +64,7 @@ This is a minimal policy that includes ONLY the permissions needed to work. You 
       "Action": [
         "ec2:CreateSnapshot",
         "ec2:DeleteSnapshot",
-        "ec2:DescribeSnapshots",
+        "ec2:DescribeSnapshots"
       ],
       "Resource": [
         "*"

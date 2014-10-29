@@ -121,11 +121,12 @@ class snapshots
 	 */
 	private function setOptions($options)
 	{
-		if(!isset($options['snapshots'])) return false;
+		if(!isset($options['snapshots']) || !isset($options['interval'])) return false;
 
 		$this->options = array(
-			'snapshots' => (int) $options['snapshots'],
-			'interval' => $options['interval'],
+			'snapshots'   => (int) $options['snapshots'],
+			'interval'    => $options['interval'],
+			'description' => $options['description'],
 		);
 		
 		return true;

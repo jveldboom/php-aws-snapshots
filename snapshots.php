@@ -15,11 +15,11 @@ class snapshots
 				continue;
 			};
 			
-			$snapshots = self::getVolumeSnapshots($volume_id);
+			$snapshots = self::getSnapshots(array('volume-id'=>$volume_id,'description'=>$this->options['description']));
 			if(!$snapshots) continue;
 			
 			if(self::shouldCreate($snapshots)){
-				self::create($volume_id,$options['description']);
+				self::create($volume_id,$this->options['description']);
 			}
 			
 			// delete extra snapshots base on number of 'snapshots' option
@@ -82,7 +82,7 @@ class snapshots
 	 */
 	private function deleteExtra($volume_id)
 	{
-		$snapshots = self::getVolumeSnapshots($volume_id);
+		$snapshots = self::getSnapshots(array('volume-id'=>$volume_id,'description'=>$this->options['description']));
 		$snapshot_count = count($snapshots->Snapshots);
 		
 		if($snapshot_count <= $this->options['snapshots']) return false;
@@ -94,23 +94,26 @@ class snapshots
 	}
 	
 	/**
-	 * Get list of volume's snapshots
-	 * @param  string $volume_id
+	 * Get list of snapshots based on filters
+	 * @param  array $filters
 	 * @return mixed  json object on true
 	 */
-	public function getVolumeSnapshots($volume_id)
+	public function getSnapshots($filters=array())
 	{
-		$cmd = sprintf('/usr/local/bin/aws ec2 describe-snapshots --filters Name=volume-id,Values=%s', escapeshellarg($volume_id));
+		$cmd_filters = false;
+		foreach($filters as $name => $value) $cmd_filters .= 'Name='.escapeshellarg($name).',Values='.escapeshellarg($value).' ';
+
+		$cmd = '/usr/local/bin/aws ec2 describe-snapshots '.($cmd_filters ? '--filters '.trim($cmd_filters) : '');
 		$response = shell_exec($cmd);
 
 		$snapshots = json_decode($response);
 		if(!$snapshots) return false;
-		
+
 		// sort asc by date
 		usort($snapshots->Snapshots, function($a,$b){
 			return strtotime($a->StartTime) - strtotime($b->StartTime);
 		});
-		
+
 		return $snapshots;
 	}
 

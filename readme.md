@@ -74,5 +74,14 @@ This is a minimal policy that includes ONLY the permissions needed to work. You 
 }
 ```
 
+## Fresh install on Ubuntu 14.04
+```
+sudo apt-get install python-pip php-cli
+sudo pip install awscli
+
+// must set region - ie: us-east-1, us-west-1
+aws configure
+```
+
 ## Questions, issues or suggestions
 Please use the [issues section](https://github.com/jveldboom/php-aws-snapshots/issues) for any questions or issues you have. Also, suggestions, pull request or any help is most welcome!

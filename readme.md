@@ -76,7 +76,7 @@ This is a minimal policy that includes ONLY the permissions needed to work. You 
 
 ## Fresh install on Ubuntu 14.04
 ```
-sudo apt-get install python-pip php-cli
+sudo apt-get install python-pip php5-cli
 sudo pip install awscli
 
 // must set region - ie: us-east-1, us-west-1
